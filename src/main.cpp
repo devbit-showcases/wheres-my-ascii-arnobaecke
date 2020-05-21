@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ncurses.h>
 
-#include "lib/dialog.h"
+#include "lib/intro.h"
 #include "lib/game.h"
 
 using namespace std;
@@ -10,25 +10,21 @@ int main(void) {
 
     // initialize ncurses (allocate memory and clear console)
     initscr();
+    
+    AsciiGame::Intro intro;
+    intro.checkPrerequisites();
 
     AsciiGame::Game game;
 
-    int selectedcard = 5;
+    int selectedCard = game.SelectCard();
 
-    for(int i = 0; i < 9; i++) {
-        if(i == selectedcard) {
-            game.printCard(i, "?", true);
-        }
-        else {
-            game.printCard(i, "?", false);
-        }        
-    }
+    game.RevealCard(selectedCard);
 
-    refresh();
+    //selectedCard = game.SelectCard();
 
 
     //KEEP OPEN
-    int c = getch();
+    getch();
 
     // end ncurses (deallocate memory)
     endwin();
