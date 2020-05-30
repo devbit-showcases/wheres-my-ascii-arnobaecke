@@ -18,7 +18,7 @@ namespace AsciiGame {
             init_pair(5, COLOR_MAGENTA, -1);
         }
         else {
-            printw("Sorry. Your terminal does not support colours.");
+            printw("Sorry. Your terminal does not support colors.");
         }
 
         printw("\nReady to go!");

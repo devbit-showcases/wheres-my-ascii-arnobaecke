@@ -1,7 +1,11 @@
 #include "valuegenerator.h"
 
 namespace AsciiGame {
-    void ValueGenerator::AssignValues(void) {
+    ValueGenerator::ValueGenerator(void) {
+        FillArray();
+    }
+
+    void ValueGenerator::FillArray(void) {
         srand (time(NULL));
 
         int value = 0;
@@ -13,6 +17,11 @@ namespace AsciiGame {
 
             cardValues[i] = value;
         }
+    }
+
+    int* ValueGenerator::GetCardValues(void) {
+
+        return cardValues;
     }
 
     int ValueGenerator::CountOccurrences(int value) {

@@ -5,10 +5,15 @@
 
 namespace AsciiGame {
     class ValueGenerator { 
+        //Constructor
         public:
-            void AssignValues(void);
+            ValueGenerator(void);
+
+        public:
+            int* GetCardValues(void);
 
         private:
+            void FillArray(void);
             int CountOccurrences(int value);
         
         private:
