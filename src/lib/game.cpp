@@ -6,56 +6,20 @@ namespace AsciiGame
         AsciiGame::ValueGenerator ValueGenerator;
         this->cardValues = ValueGenerator.GetGeneratedValues();
 
-        for(int i = 0; i < 9; i++) {
+        /* for(int i = 0; i < 9; i++) {
             printw(std::to_string(cardValues[i]).c_str());
-        }
-        refresh();
+        } */
     }
 
     int Game::SelectCard(void)
     {
         keypad(stdscr, true);
 
-        int selectedCard = 0;
-
         while(true) {
-            // Print card layout
-            for(int i = 0; i < 9; i++) {
-                if(i == selectedCard) {
-                    // Selection hand
-                    PrintCard(i, -2);
-                }
-                else {
-                    if(cardRevealed[i]) {
-                        // Card value
-                        PrintCard(i, cardValues[i]);
-                    }
-                    else {
-                        // Card back
-                        PrintCard(i, -1);
-                    }
-                }
-            }
-            refresh();
-
-            // Navigation
-            int userInput = wgetch(stdscr);
-
-            if(userInput == KEY_LEFT && (selectedCard - 1) % 3 < 2 && (selectedCard -1) >= 0) {
-                selectedCard--;
-            }
-            else if(userInput == KEY_RIGHT && (selectedCard + 1) % 3 > 0) {
-                selectedCard++;
-            }
-            else if(userInput == KEY_UP && (selectedCard - 3) >= 0) {
-                selectedCard -= 3;
-            }
-            else if(userInput == KEY_DOWN && (selectedCard + 3) <= 8) {
-                selectedCard += 3;
-            }
-
-            // Enter key
-            if(userInput == 10) {
+            BuildPlayfield();
+            
+            bool selection = NavigateAndSelect();
+            if(selection) {
                 break;
             }
         }
@@ -64,6 +28,53 @@ namespace AsciiGame
         
         return selectedCard;
     }
+
+    void Game::BuildPlayfield(void) {
+        for(int i = 0; i < 9; i++) {
+            if(i == selectedCard) {
+                // Selection hand
+                PrintCard(i, -2);
+            }
+            else {
+                if(cardRevealed[i]) {
+                    // Revealed card
+                    PrintCard(i, cardValues[i]);
+                }
+                else {
+                    // Card back
+                    PrintCard(i, -1);
+                }
+            }
+        }
+        refresh();
+    }
+
+    bool Game::NavigateAndSelect(void) {
+        int userInput = wgetch(stdscr);
+
+        if(userInput == KEY_LEFT && (selectedCard - 1) % 3 < 2 && (selectedCard -1) >= 0) {
+            selectedCard--;
+        }
+        else if(userInput == KEY_RIGHT && (selectedCard + 1) % 3 > 0) {
+            selectedCard++;
+        }
+        else if(userInput == KEY_UP && (selectedCard - 3) >= 0) {
+            selectedCard -= 3;
+        }
+        else if(userInput == KEY_DOWN && (selectedCard + 3) <= 8) {
+            selectedCard += 3;
+        }
+
+        bool selectThisCard = false;
+
+        // Enter key
+        if(userInput == 10) {
+            selectThisCard = true;
+        }
+
+        return selectThisCard;
+    }
+
 
     void Game::PrintCard(int cardNumber, int cardValue) {
 

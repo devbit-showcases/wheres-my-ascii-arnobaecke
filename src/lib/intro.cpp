@@ -25,5 +25,7 @@ namespace AsciiGame {
 
         refresh();
         getch();
+
+        clear();
     }
 }

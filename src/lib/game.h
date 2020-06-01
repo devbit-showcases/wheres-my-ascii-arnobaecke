@@ -14,13 +14,15 @@ namespace AsciiGame {
 
         public:
             int SelectCard(void);
-            void RevealCard(int cardNumber);
-        
+
         private:
+            void BuildPlayfield(void);
+            bool NavigateAndSelect(void);
             void PrintCard(int cardNumber, int cardValue);
         
         private:
             std::array<int, 9> cardValues = {0};
             bool cardRevealed[9] = {0};
+            int selectedCard = 0;
     };
 }
