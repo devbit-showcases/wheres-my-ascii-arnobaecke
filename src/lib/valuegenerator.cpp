@@ -10,25 +10,25 @@ namespace AsciiGame {
 
         int value = 0;
 
-        for(unsigned int i = 0; i < sizeof(cardValues); i++) {
+        for(unsigned int i = 0; i < sizeof(generatedValues); i++) {
             do {
                 value = rand() % 4;
             } while(CountOccurrences(value) >= 2);
 
-            cardValues[i] = value;
+            generatedValues[i] = value;
         }
     }
 
-    int* ValueGenerator::GetCardValues(void) {
+    std::array<int, 9> ValueGenerator::GetGeneratedValues(void) {
 
-        return cardValues;
+        return generatedValues;
     }
 
     int ValueGenerator::CountOccurrences(int value) {
         int occurrences = 0;
 
-        for(unsigned int i = 0; i < sizeof(cardValues); i++) {
-            if(cardValues[i] == value) {
+        for(unsigned int i = 0; i < sizeof(generatedValues); i++) {
+            if(generatedValues[i] == value) {
                 occurrences++;
             }
         }
@@ -36,5 +36,5 @@ namespace AsciiGame {
         return occurrences;
     }
 
-    int cardValues[9] = { };
+    std::array<int, 9> generatedValues[9] = { };
 }

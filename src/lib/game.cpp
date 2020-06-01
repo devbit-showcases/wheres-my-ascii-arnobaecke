@@ -4,10 +4,8 @@ namespace AsciiGame
 {
     Game::Game(void) {
         AsciiGame::ValueGenerator ValueGenerator;
-        cardValues = ValueGenerator.GetCardValues();
+        this->cardValues = ValueGenerator.GetGeneratedValues();
     }
-
-
 
     int Game::SelectCard(void)
     {
@@ -23,7 +21,7 @@ namespace AsciiGame
                 }
                 else {
                     if(cardRevealed[i]) {
-                        PrintCard(i, 2);
+                        PrintCard(i, cardValues[i]);
                     }
                     else {
                         PrintCard(i, -1);
@@ -158,6 +156,6 @@ namespace AsciiGame
         wrefresh(card);
     }
 
-    int cardValues[9] = { };
-    bool isRevealed[9] = { };
+    std::array<int, 9> cardValues = { };
+    std::array<bool, 9> isRevealed = { };
 }

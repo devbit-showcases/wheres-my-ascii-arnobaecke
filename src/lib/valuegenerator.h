@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <time.h>
+#include <array>
 
 namespace AsciiGame {
     class ValueGenerator { 
@@ -10,13 +11,13 @@ namespace AsciiGame {
             ValueGenerator(void);
 
         public:
-            int* GetCardValues(void);
+            std::array<int, 9> GetGeneratedValues(void);
 
         private:
             void FillArray(void);
             int CountOccurrences(int value);
         
         private:
-            int cardValues[9];
+            std::array<int, 9> generatedValues;
     };
 }

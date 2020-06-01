@@ -17,7 +17,7 @@ namespace AsciiGame {
             void PrintCard(int cardNumber, int cardValue);
         
         private:
-            int cardValues[9];
-            bool cardRevealed[9];
+            std::array<int, 9> cardValues;
+            std::array<bool, 9> cardRevealed;
     };
 }
