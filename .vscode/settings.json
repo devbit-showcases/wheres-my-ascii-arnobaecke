@@ -41,6 +41,7 @@
         "cctype": "cpp",
         "iterator": "cpp",
         "string": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "charconv": "cpp"
     }
 }

@@ -5,6 +5,11 @@ namespace AsciiGame
     Game::Game(void) {
         //AsciiGame::ValueGenerator ValueGenerator;
         //this->cardValues = ValueGenerator.GetGeneratedValues();
+
+        for(int i = 0; i < 9; i++) {
+            printw(std::to_string(cardValues[i]).c_str());
+        }
+        refresh();
     }
 
     int Game::SelectCard(void)
@@ -14,6 +19,7 @@ namespace AsciiGame
         int selectedCard = 0;
 
         while(true) {
+            // Print card layout
             for(int i = 0; i < 9; i++) {
                 if(i == selectedCard) {
                     // Selection hand
@@ -53,6 +59,8 @@ namespace AsciiGame
                 break;
             }
         }
+
+        cardRevealed[selectedCard] = true;
         
         return selectedCard;
     }
