@@ -24,14 +24,14 @@ namespace AsciiGame
             }
         }
 
-        cardRevealed[selectedCard] = true;
-        
+        CheckIfCorrect();
+       
         return selectedCard;
     }
 
     void Game::BuildPlayfield(void) {
         for(int i = 0; i < 9; i++) {
-            if(i == selectedCard) {
+            if(i == selectedCard && i != previouslyChosenCard) {
                 // Selection hand
                 PrintCard(i, -2);
             }
@@ -73,6 +73,20 @@ namespace AsciiGame
         }
 
         return selectThisCard;
+    }
+
+    void Game::CheckIfCorrect(void) {
+        if(previouslyChosenCard == -999) {
+            cardRevealed[selectedCard] = true;
+            previouslyChosenCard = selectedCard;
+        }
+        else if(cardValues[selectedCard] == cardValues[previouslyChosenCard]) {
+            cardRevealed[selectedCard] = true;
+            previouslyChosenCard = -999;
+        }
+        else {
+            cardRevealed[previouslyChosenCard] = false;
+        }
     }
 
 
@@ -176,4 +190,5 @@ namespace AsciiGame
 
     std::array<int, 9> cardValues;
     bool cardRevealed[9];
+    int previouslyChosenCard;
 }
