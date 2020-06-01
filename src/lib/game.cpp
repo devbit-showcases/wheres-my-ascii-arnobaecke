@@ -3,8 +3,8 @@
 namespace AsciiGame
 {
     Game::Game(void) {
-        //AsciiGame::ValueGenerator ValueGenerator;
-        //this->cardValues = ValueGenerator.GetGeneratedValues();
+        AsciiGame::ValueGenerator ValueGenerator;
+        this->cardValues = ValueGenerator.GetGeneratedValues();
 
         for(int i = 0; i < 9; i++) {
             printw(std::to_string(cardValues[i]).c_str());
@@ -163,6 +163,6 @@ namespace AsciiGame
         wrefresh(card);
     }
 
-    std::array<int, 9> cardValues = {0};
-    bool cardRevealed[9] = { };
+    std::array<int, 9> cardValues;
+    bool cardRevealed[9];
 }

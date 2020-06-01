@@ -16,7 +16,7 @@ int main(void) {
 
     AsciiGame::Game game;
 
-/*     int selectedCard;
+     int selectedCard;
     
     selectedCard = game.SelectCard();
     selectedCard = game.SelectCard();
@@ -29,7 +29,7 @@ int main(void) {
     selectedCard = game.SelectCard();
     selectedCard = game.SelectCard();
     selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard(); */
+    selectedCard = game.SelectCard();
 
 
     //KEEP OPEN

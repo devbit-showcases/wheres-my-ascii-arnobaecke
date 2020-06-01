@@ -18,6 +18,6 @@ namespace AsciiGame {
             int CountOccurrences(int value);
         
         private:
-            std::array<int, 9> generatedValues;
+            std::array<int, 9> generatedValues = {0};
     };
 }

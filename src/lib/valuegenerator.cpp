@@ -10,9 +10,9 @@ namespace AsciiGame {
 
         int value = 0;
 
-        for(unsigned int i = 0; i < sizeof(generatedValues); i++) {
+        for(unsigned int i = 0; i < generatedValues.size(); i++) {
             do {
-                value = rand() % 4;
+                value = rand() % 5;
             } while(CountOccurrences(value) >= 2);
 
             generatedValues[i] = value;
@@ -27,7 +27,7 @@ namespace AsciiGame {
     int ValueGenerator::CountOccurrences(int value) {
         int occurrences = 0;
 
-        for(unsigned int i = 0; i < sizeof(generatedValues); i++) {
+        for(unsigned int i = 0; i < generatedValues.size(); i++) {
             if(generatedValues[i] == value) {
                 occurrences++;
             }
@@ -36,5 +36,5 @@ namespace AsciiGame {
         return occurrences;
     }
 
-    std::array<int, 9> generatedValues[9] = { 0 };
+    std::array<int, 9> generatedValues;
 }
