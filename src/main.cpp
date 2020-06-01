@@ -18,11 +18,6 @@ int main(void) {
 
     int selectedCard = game.SelectCard();
 
-    game.RevealCard(selectedCard);
-
-    //selectedCard = game.SelectCard();
-
-
     //KEEP OPEN
     getch();
 

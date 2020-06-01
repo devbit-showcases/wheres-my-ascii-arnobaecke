@@ -36,5 +36,5 @@ namespace AsciiGame {
         return occurrences;
     }
 
-    std::array<int, 9> generatedValues[9] = { };
+    std::array<int, 9> generatedValues[9] = { 0 };
 }

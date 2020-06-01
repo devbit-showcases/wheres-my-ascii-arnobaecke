@@ -3,8 +3,8 @@
 namespace AsciiGame
 {
     Game::Game(void) {
-        AsciiGame::ValueGenerator ValueGenerator;
-        this->cardValues = ValueGenerator.GetGeneratedValues();
+        //AsciiGame::ValueGenerator ValueGenerator;
+        //this->cardValues = ValueGenerator.GetGeneratedValues();
     }
 
     int Game::SelectCard(void)
@@ -14,19 +14,21 @@ namespace AsciiGame
         int selectedCard = 0;
 
         while(true) {
-            // Card layout
             for(int i = 0; i < 9; i++) {
                 if(i == selectedCard) {
+                    // Selection hand
                     PrintCard(i, -2);
                 }
                 else {
                     if(cardRevealed[i]) {
+                        // Card value
                         PrintCard(i, cardValues[i]);
                     }
                     else {
+                        // Card back
                         PrintCard(i, -1);
                     }
-                }        
+                }
             }
             refresh();
 
@@ -55,10 +57,6 @@ namespace AsciiGame
         return selectedCard;
     }
 
-    void Game::RevealCard(int cardNumber) {
-        PrintCard(cardNumber, 4);
-    }
-
     void Game::PrintCard(int cardNumber, int cardValue) {
 
         // Editable parameters
@@ -82,6 +80,9 @@ namespace AsciiGame
         int iconYPosition = (cardSize / 2) - 2;
         int iconXPosition = (cardSize ) - 3;
 
+        // Adding decoration to the box
+        mvwprintw(card, (ySize - 2), (xSize - 3), "_|");
+
         // Adding visuals to the box
         // > Selection hand
         if(cardValue == -2) {
@@ -104,8 +105,6 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 2), iconXPosition, ".......");
             mvwprintw(card, (iconYPosition + 3), iconXPosition, ".......");
             wattroff(card, COLOR_PAIR(5));
-
-            mvwprintw(card, (ySize - 2), (xSize - 3), "_|");
         }
         // > Heart
         else if(cardValue == 0) {
@@ -156,6 +155,6 @@ namespace AsciiGame
         wrefresh(card);
     }
 
-    std::array<int, 9> cardValues = { };
-    std::array<bool, 9> isRevealed = { };
+    std::array<int, 9> cardValues = {0};
+    bool cardRevealed[9] = { };
 }

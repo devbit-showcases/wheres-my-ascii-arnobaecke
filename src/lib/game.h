@@ -3,9 +3,12 @@
 #include "valuegenerator.h"
 #include <ncurses.h>
 #include <string>
+#include <vector>
 
 namespace AsciiGame {
     class Game {
+
+        //Constructor
         public:
             Game(void);
 
@@ -18,6 +21,6 @@ namespace AsciiGame {
         
         private:
             std::array<int, 9> cardValues;
-            std::array<bool, 9> cardRevealed;
+            bool cardRevealed[9] = { };
     };
 }
