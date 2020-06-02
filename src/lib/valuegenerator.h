@@ -2,22 +2,23 @@
 
 #include <iostream>
 #include <time.h>
-#include <array>
+#include <vector>
 
 namespace AsciiGame {
     class ValueGenerator { 
         //Constructor
         public:
-            ValueGenerator(void);
+            ValueGenerator(int numberOfValues);
 
         public:
-            std::array<int, 9> GetGeneratedValues(void);
+            std::vector<int> GetGeneratedValues(void);
 
         private:
             void FillArray(void);
             int CountOccurrences(int value);
         
         private:
-            std::array<int, 9> generatedValues = {0};
+            int numberOfValues = 0;
+            std::vector<int> generatedValues;
     };
 }

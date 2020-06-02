@@ -2,8 +2,11 @@
 
 namespace AsciiGame
 {
-    Game::Game(void) {
-        AsciiGame::ValueGenerator ValueGenerator;
+    Game::Game(int cardsPerAxis) {
+        this->cardsPerAxis = cardsPerAxis;
+        this->cardsOnPlayfield = cardsPerAxis * cardsPerAxis;
+
+        AsciiGame::ValueGenerator ValueGenerator(cardsOnPlayfield);
         this->cardValues = ValueGenerator.GetGeneratedValues();
 
         this->previouslyChosenCard = -999;
@@ -30,7 +33,7 @@ namespace AsciiGame
     }
 
     void Game::BuildPlayfield(void) {
-        for(int i = 0; i < 9; i++) {
+        for(int i = 0; i < cardsOnPlayfield; i++) {
             // Revealed card, selected
             if(cardRevealed[i] && (i == selectedCard)) {
                 PrintCard(i, cardValues[i], true);
@@ -54,17 +57,17 @@ namespace AsciiGame
     bool Game::NavigateAndSelect(void) {
         int userInput = wgetch(stdscr);
 
-        if(userInput == KEY_LEFT && (selectedCard - 1) % 3 < 2 && (selectedCard -1) >= 0) {
+        if(userInput == KEY_LEFT && (selectedCard - 1) % cardsPerAxis < (cardsPerAxis - 1) && (selectedCard -1) >= 0) {
             selectedCard--;
         }
-        else if(userInput == KEY_RIGHT && (selectedCard + 1) % 3 > 0) {
+        else if(userInput == KEY_RIGHT && (selectedCard + 1) % cardsPerAxis > 0) {
             selectedCard++;
         }
-        else if(userInput == KEY_UP && (selectedCard - 3) >= 0) {
-            selectedCard -= 3;
+        else if(userInput == KEY_UP && (selectedCard - cardsPerAxis) >= 0) {
+            selectedCard -= cardsPerAxis;
         }
-        else if(userInput == KEY_DOWN && (selectedCard + 3) <= 8) {
-            selectedCard += 3;
+        else if(userInput == KEY_DOWN && (selectedCard + cardsPerAxis) < cardsOnPlayfield) {
+            selectedCard += cardsPerAxis;
         }
 
         bool selectThisCard = false;
@@ -103,7 +106,6 @@ namespace AsciiGame
 
         // Editable parameters
         const int cardSize = 11;
-        const int cardsPerAxis = 3;
 
         // Calculated parameters (do not edit)
         const int ySize = cardSize;

@@ -1,25 +1,29 @@
 #include "valuegenerator.h"
 
 namespace AsciiGame {
-    ValueGenerator::ValueGenerator(void) {
+    ValueGenerator::ValueGenerator(int numberOfValues) {
+        this->numberOfValues = numberOfValues;
         FillArray();
     }
 
     void ValueGenerator::FillArray(void) {
+        const int CARD_VARIANTS = 4;
+        int maxOccurences = numberOfValues / CARD_VARIANTS;
+
         srand (time(NULL));
 
         int value = 0;
 
-        for(unsigned int i = 0; i < generatedValues.size(); i++) {
+        for(unsigned int i = 0; i < numberOfValues; i++) {
             do {
-                value = rand() % 5;
-            } while(CountOccurrences(value) >= 2);
+                value = rand() % (CARD_VARIANTS + 1);
+            } while(CountOccurrences(value) >= maxOccurences);
 
-            generatedValues[i] = value;
+            generatedValues.push_back(value);
         }
     }
 
-    std::array<int, 9> ValueGenerator::GetGeneratedValues(void) {
+    std::vector<int> ValueGenerator::GetGeneratedValues(void) {
 
         return generatedValues;
     }
@@ -36,5 +40,5 @@ namespace AsciiGame {
         return occurrences;
     }
 
-    std::array<int, 9> generatedValues;
+    std::vector<int> generatedValues;
 }

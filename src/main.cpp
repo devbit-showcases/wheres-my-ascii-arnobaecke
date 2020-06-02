@@ -9,7 +9,7 @@ using namespace std;
 int main(void) {
     AsciiGame::Intro intro;
 
-    AsciiGame::Game game;
+    AsciiGame::Game game(3);
 
     int selectedCard;
 

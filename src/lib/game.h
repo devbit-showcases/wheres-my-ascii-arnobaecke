@@ -10,7 +10,7 @@ namespace AsciiGame {
 
         //Constructor
         public:
-            Game(void);
+            Game(int cardsPerAxis);
 
         public:
             int SelectCard(void);
@@ -22,8 +22,11 @@ namespace AsciiGame {
             void PrintCard(int cardNumber, int cardValue, bool);
         
         private:
-            std::array<int, 9> cardValues = {0};
-            bool cardRevealed[9] = {0};
+            int cardsPerAxis = 0;
+            int cardsOnPlayfield = 0;
+
+            std::vector<int> cardValues;
+            bool cardRevealed[16] = {0}; // Max size = 16
             int selectedCard = 0;
             int previouslyChosenCard = -999;
     };
