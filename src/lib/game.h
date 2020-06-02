@@ -19,7 +19,7 @@ namespace AsciiGame {
             void BuildPlayfield(void);
             bool NavigateAndSelect(void);
             void CheckIfCorrect(void);
-            void PrintCard(int cardNumber, int cardValue);
+            void PrintCard(int cardNumber, int cardValue, bool);
         
         private:
             std::array<int, 9> cardValues = {0};

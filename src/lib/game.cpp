@@ -25,25 +25,31 @@ namespace AsciiGame
                 break;
             }
         }
+        
+        if(selectedCard != previouslyChosenCard) {
+            CheckIfCorrect();
+        }
 
-        CheckIfCorrect();
-       
         return selectedCard;
     }
 
     void Game::BuildPlayfield(void) {
         for(int i = 0; i < 9; i++) {
-            if(cardRevealed[i]) {
-                // Revealed card
-                PrintCard(i, cardValues[i]);
+            // Revealed card, selected
+            if(cardRevealed[i] && (i == selectedCard)) {
+                PrintCard(i, cardValues[i], true);
             }
-            else if(i == selectedCard) {
-                // Selection hand
-                PrintCard(i, -2);
+            // Revealed card, unselected
+            else if(cardRevealed[i] && (i != selectedCard)) {
+                PrintCard(i, cardValues[i], false);
             }
+            // Anonymous card, selected
+            else if(! cardRevealed[i] && i == selectedCard) {
+                PrintCard(i, -1, true);
+            }
+            // Anonymous card, unselected
             else {
-                // Card back
-                PrintCard(i, -1);
+                PrintCard(i, -1, false);
             }
         }
         refresh();
@@ -86,7 +92,7 @@ namespace AsciiGame
             cardRevealed[selectedCard] = true;
             previouslyChosenCard = -999;
         }
-        // Wrong guess;
+        // Wrong guess
         else {
             cardRevealed[selectedCard] = true;
             BuildPlayfield();
@@ -98,7 +104,7 @@ namespace AsciiGame
     }
 
 
-    void Game::PrintCard(int cardNumber, int cardValue) {
+    void Game::PrintCard(int cardNumber, int cardValue, bool selected) {
 
         // Editable parameters
         const int cardSize = 11;
@@ -119,26 +125,13 @@ namespace AsciiGame
         box(card, 0, 0);
 
         int iconYPosition = (cardSize / 2) - 2;
-        int iconXPosition = (cardSize ) - 3;
+        int iconXPosition = cardSize - 3;
 
         // Adding decoration to the box
         mvwprintw(card, (ySize - 2), (xSize - 3), "_|");
 
         // Adding visuals to the box
-        // > Selection hand
-        if(cardValue == -2) {
-            wattron(card, COLOR_PAIR(4));
-            mvwprintw(card, (iconYPosition + 0), (iconXPosition - 3), "   .._,-/`)");
-            mvwprintw(card, (iconYPosition + 1), (iconXPosition - 3), "   .// / / )");
-            mvwprintw(card, (iconYPosition + 2), (iconXPosition - 3), "   // / / / )");
-            mvwprintw(card, (iconYPosition + 3), (iconXPosition - 3), " /`/ / / / /");
-            mvwprintw(card, (iconYPosition + 4), (iconXPosition - 3), "/ /     ` /");
-            mvwprintw(card, (iconYPosition + 5), (iconXPosition - 3), "\\        /");
-            mvwprintw(card, (iconYPosition + 6), (iconXPosition - 3), " )     .'");
-            mvwprintw(card, (iconYPosition + 7), (iconXPosition - 3), "/     /");
-            wattroff(card, COLOR_PAIR(4));
-        }
-        // > Back
+        // > Anonymous
         if(cardValue == -1) {
             wattron(card, COLOR_PAIR(5));
             mvwprintw(card, (iconYPosition + 0), iconXPosition, ".......");
@@ -177,10 +170,10 @@ namespace AsciiGame
         // > Diamonds
         else if(cardValue == 3) {
             wattron(card, COLOR_PAIR(3));
-            mvwprintw(card, (iconYPosition + 0), iconXPosition, " .");
-            mvwprintw(card, (iconYPosition + 1), iconXPosition, "/ \\");
-            mvwprintw(card, (iconYPosition + 2), iconXPosition, "\\ /");
-            mvwprintw(card, (iconYPosition + 3), iconXPosition, " °");
+            mvwprintw(card, (iconYPosition + 0), iconXPosition, "  .");
+            mvwprintw(card, (iconYPosition + 1), iconXPosition, " / \\");
+            mvwprintw(card, (iconYPosition + 2), iconXPosition, " \\ /");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  °");
             wattroff(card, COLOR_PAIR(3));
         }
         // > Empty
@@ -191,6 +184,26 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 2), iconXPosition, "//\\\\");
             mvwprintw(card, (iconYPosition + 3), iconXPosition, "EMPTY");
             wattroff(card, COLOR_PAIR(0));
+        }
+
+        // > Cursor
+        if(selected && cardValue == -1) {
+            wattron(card, COLOR_PAIR(4));
+            mvwprintw(card, (iconYPosition + 0), (iconXPosition - 3), "   .._,-/`)");
+            mvwprintw(card, (iconYPosition + 1), (iconXPosition - 3), "   .// / / )");
+            mvwprintw(card, (iconYPosition + 2), (iconXPosition - 3), "   // / / / )");
+            mvwprintw(card, (iconYPosition + 3), (iconXPosition - 3), " /`/ / / / /");
+            mvwprintw(card, (iconYPosition + 4), (iconXPosition - 3), "/ /     ` /");
+            mvwprintw(card, (iconYPosition + 5), (iconXPosition - 3), "\\        /");
+            mvwprintw(card, (iconYPosition + 6), (iconXPosition - 3), " )     .'");
+            mvwprintw(card, (iconYPosition + 7), (iconXPosition - 3), "/     /");
+            wattroff(card, COLOR_PAIR(4));
+        }
+        else if(selected && cardValue != -1) {
+            wattron(card, COLOR_PAIR(4));
+            mvwprintw(card, (ySize - 3), 2, "XXX");
+            mvwprintw(card, (ySize - 2), 2, "XXX");
+            wattron(card, COLOR_PAIR(4));
         }
 
         wrefresh(card);

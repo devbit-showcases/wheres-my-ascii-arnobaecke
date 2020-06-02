@@ -1,10 +1,16 @@
 #pragma once
 
 #include <ncurses.h>
+#include <string>
 
 namespace AsciiGame {
-    class Intro {     
+    class Intro {
+        //Constructor   
         public:
-            void checkPrerequisites(void);
+            Intro(void);
+
+        private:
+            void PrintLogo(void);
+            void PrintInstructions(void);
     };
 }

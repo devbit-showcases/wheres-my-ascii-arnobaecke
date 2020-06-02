@@ -7,12 +7,7 @@
 using namespace std;
 
 int main(void) {
-
-    // initialize ncurses (allocate memory and clear console)
-    initscr();
-    
     AsciiGame::Intro intro;
-    intro.checkPrerequisites();
 
     AsciiGame::Game game;
 
