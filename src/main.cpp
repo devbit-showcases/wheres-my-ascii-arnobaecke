@@ -16,21 +16,11 @@ int main(void) {
 
     AsciiGame::Game game;
 
-     int selectedCard;
-    
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
-    selectedCard = game.SelectCard();
+    int selectedCard;
 
+    while(true) {
+        selectedCard = game.SelectCard();
+    }
 
     //KEEP OPEN
     getch();

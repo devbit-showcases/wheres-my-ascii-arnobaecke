@@ -6,6 +6,8 @@ namespace AsciiGame
         AsciiGame::ValueGenerator ValueGenerator;
         this->cardValues = ValueGenerator.GetGeneratedValues();
 
+        this->previouslyChosenCard = -999;
+
         /* for(int i = 0; i < 9; i++) {
             printw(std::to_string(cardValues[i]).c_str());
         } */
@@ -31,19 +33,17 @@ namespace AsciiGame
 
     void Game::BuildPlayfield(void) {
         for(int i = 0; i < 9; i++) {
-            if(i == selectedCard && i != previouslyChosenCard) {
+            if(cardRevealed[i]) {
+                // Revealed card
+                PrintCard(i, cardValues[i]);
+            }
+            else if(i == selectedCard) {
                 // Selection hand
                 PrintCard(i, -2);
             }
             else {
-                if(cardRevealed[i]) {
-                    // Revealed card
-                    PrintCard(i, cardValues[i]);
-                }
-                else {
-                    // Card back
-                    PrintCard(i, -1);
-                }
+                // Card back
+                PrintCard(i, -1);
             }
         }
         refresh();
@@ -76,16 +76,24 @@ namespace AsciiGame
     }
 
     void Game::CheckIfCorrect(void) {
+        // New guess
         if(previouslyChosenCard == -999) {
             cardRevealed[selectedCard] = true;
             previouslyChosenCard = selectedCard;
         }
+        // Correct guess
         else if(cardValues[selectedCard] == cardValues[previouslyChosenCard]) {
             cardRevealed[selectedCard] = true;
             previouslyChosenCard = -999;
         }
+        // Wrong guess;
         else {
+            cardRevealed[selectedCard] = true;
+            BuildPlayfield();
+            getch();
+            cardRevealed[selectedCard] = false;
             cardRevealed[previouslyChosenCard] = false;
+            previouslyChosenCard = -999;
         }
     }
 
@@ -187,8 +195,4 @@ namespace AsciiGame
 
         wrefresh(card);
     }
-
-    std::array<int, 9> cardValues;
-    bool cardRevealed[9];
-    int previouslyChosenCard;
 }
