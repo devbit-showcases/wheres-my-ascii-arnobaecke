@@ -7,10 +7,6 @@ namespace AsciiGame
         this->cardValues = ValueGenerator.GetGeneratedValues();
 
         this->previouslyChosenCard = -999;
-
-        /* for(int i = 0; i < 9; i++) {
-            printw(std::to_string(cardValues[i]).c_str());
-        } */
     }
 
     int Game::SelectCard(void)
@@ -26,7 +22,7 @@ namespace AsciiGame
             }
         }
         
-        if(selectedCard != previouslyChosenCard) {
+        if(selectedCard != previouslyChosenCard && ! cardRevealed[selectedCard]) {
             CheckIfCorrect();
         }
 
@@ -103,7 +99,6 @@ namespace AsciiGame
         }
     }
 
-
     void Game::PrintCard(int cardNumber, int cardValue, bool selected) {
 
         // Editable parameters
@@ -140,13 +135,13 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 3), iconXPosition, ".......");
             wattroff(card, COLOR_PAIR(5));
         }
-        // > Heart
+        // > Empty
         else if(cardValue == 0) {
             wattron(card, COLOR_PAIR(0));
-            mvwprintw(card, (iconYPosition + 0), iconXPosition, " _ _");
-            mvwprintw(card, (iconYPosition + 1), iconXPosition, "( v )");
-            mvwprintw(card, (iconYPosition + 2), iconXPosition, " \\ /");
-            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  *");
+            mvwprintw(card, (iconYPosition + 0), iconXPosition, "_  _");
+            mvwprintw(card, (iconYPosition + 1), iconXPosition, "\\\\//");
+            mvwprintw(card, (iconYPosition + 2), iconXPosition, "//\\\\");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "EMPTY");
             wattroff(card, COLOR_PAIR(0));
         }
         // > Clubs
@@ -176,13 +171,13 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 3), iconXPosition, "  °");
             wattroff(card, COLOR_PAIR(3));
         }
-        // > Empty
+        // > Heart
         else if(cardValue == 4) {
             wattron(card, COLOR_PAIR(0));
-            mvwprintw(card, (iconYPosition + 0), iconXPosition, "_  _");
-            mvwprintw(card, (iconYPosition + 1), iconXPosition, "\\\\//");
-            mvwprintw(card, (iconYPosition + 2), iconXPosition, "//\\\\");
-            mvwprintw(card, (iconYPosition + 3), iconXPosition, "EMPTY");
+            mvwprintw(card, (iconYPosition + 0), iconXPosition, " _ _");
+            mvwprintw(card, (iconYPosition + 1), iconXPosition, "( v )");
+            mvwprintw(card, (iconYPosition + 2), iconXPosition, " \\ /");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  *");
             wattroff(card, COLOR_PAIR(0));
         }
 
