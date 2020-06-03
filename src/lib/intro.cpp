@@ -81,8 +81,8 @@ namespace AsciiGame {
             std::string(" | The navigation within the game is done with  |\t\t| make a nostalgic trip down <memory> lane ;-).|\n") +
             std::string(" | the array keys. The little hand will show    |\t\t| It is even more fun if there are crytical    |\n") +
             std::string(" | you which card you are currently selecting.  |\t\t| applications running on your device *chuckle.|\n") +
-            std::string(" | You can confirm your choice with the enter-  |\t\t|                                              |\n") +
-            std::string(" | key. Good luck and enjoy!                    |\t\t|               ° copyright 1992 - Arno Baecke |\n") +
+            std::string(" | You can confirm your choice with the enter-  |\t\t| Good luck and enjoy!                         |\n") +
+            std::string(" | key. You can exit the game with ctrl + c.    |\t\t|               ° copyright 1992 - Arno Baecke |\n") +
             std::string(" +----------------------------------------------+\t\t+----------------------------------------------+\n") +
             std::string("\n\n\n\n\t\t\t\tPRESS ANY KEY TO CONTINUE...\n");
 

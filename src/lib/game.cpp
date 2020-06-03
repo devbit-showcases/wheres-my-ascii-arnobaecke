@@ -133,7 +133,7 @@ namespace AsciiGame
         // Calculated parameters (do not edit)
         const int ySize = cardSize;
         const int xSize = cardSize * 2;
-        const int yShift = ySize + 5;
+        const int yShift = ySize + 2;
         const int xShift = xSize + 5;
         
         int cardYPosition = yShift * (cardNumber / cardsPerAxis);
