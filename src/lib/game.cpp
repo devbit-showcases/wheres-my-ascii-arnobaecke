@@ -6,10 +6,10 @@ namespace AsciiGame
         this->cardsPerAxis = cardsPerAxis;
         this->cardsOnPlayfield = cardsPerAxis * cardsPerAxis;
 
+        this->cardOccurrence = cardOccurence;
+
         AsciiGame::ValueGenerator ValueGenerator(cardsOnPlayfield, cardOccurence);
         this->cardValues = ValueGenerator.GetGeneratedValues();
-
-        this->previouslyChosenCard = -999;
     }
 
     int Game::SelectCard(void)
@@ -25,7 +25,7 @@ namespace AsciiGame
             }
         }
         
-        if(selectedCard != previouslyChosenCard && ! cardRevealed[selectedCard]) {
+        if(! cardRevealed[selectedCard]) {
             CheckIfCorrect();
         }
 
@@ -81,24 +81,46 @@ namespace AsciiGame
     }
 
     void Game::CheckIfCorrect(void) {
-        // New guess
-        if(previouslyChosenCard == -999) {
-            cardRevealed[selectedCard] = true;
-            previouslyChosenCard = selectedCard;
-        }
-        // Correct guess
-        else if(cardValues[selectedCard] == cardValues[previouslyChosenCard]) {
-            cardRevealed[selectedCard] = true;
-            previouslyChosenCard = -999;
+        cardRevealed[selectedCard] = true;
+        selectedCards.push_back(selectedCard);
+        BuildPlayfield();
+
+        // All identical cards found
+        if(SelectedCardsIdentical() && (selectedCards.size() == cardOccurrence)) {
+            selectedCards.clear();
         }
         // Wrong guess
-        else {
-            cardRevealed[selectedCard] = true;
-            BuildPlayfield();
+        else if(! SelectedCardsIdentical()) {
             getch();
-            cardRevealed[selectedCard] = false;
-            cardRevealed[previouslyChosenCard] = false;
-            previouslyChosenCard = -999;
+            UnrevealSelectedCards();
+            selectedCards.clear();
+        }
+        else {
+            // Do nothing
+        }
+    }
+
+    bool Game::SelectedCardsIdentical(void) {
+        bool isCorrect = true;
+
+        int reference = selectedCards[0];
+        int compariser = 0;
+
+        for(unsigned int i = 0; i < selectedCards.size(); i++) {
+            compariser = selectedCards[i];
+
+            if(cardValues[compariser] != cardValues[reference]) {
+                isCorrect = false;
+            }
+        }
+
+        return isCorrect;
+    }
+
+    void Game::UnrevealSelectedCards(void) {
+        for(unsigned int i = 0; i < selectedCards.size(); i++) {
+            int cardNumber = selectedCards[i];
+            cardRevealed[cardNumber] = false;
         }
     }
 

@@ -19,15 +19,18 @@ namespace AsciiGame {
             void BuildPlayfield(void);
             bool NavigateAndSelect(void);
             void CheckIfCorrect(void);
+            bool SelectedCardsIdentical(void);
+            void UnrevealSelectedCards(void);
             void PrintCard(int cardNumber, int cardValue, bool);
         
         private:
             int cardsPerAxis = 0;
             int cardsOnPlayfield = 0;
+            int cardOccurrence = 0;
 
             std::vector<int> cardValues;
+            std::vector<int> selectedCards;
             bool cardRevealed[16] = {0}; // Max size = 16
             int selectedCard = 0;
-            int previouslyChosenCard = -999;
     };
 }
