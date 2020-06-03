@@ -12,5 +12,9 @@ namespace AsciiGame {
         private:
             void PrintLogo(void);
             void PrintInstructions(void);
+
+        public:
+            int AskDifficultyLevel(void);
+
     };
 }

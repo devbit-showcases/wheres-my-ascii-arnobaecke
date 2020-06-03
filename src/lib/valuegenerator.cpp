@@ -1,8 +1,9 @@
 #include "valuegenerator.h"
 
 namespace AsciiGame {
-    ValueGenerator::ValueGenerator(int numberOfValues) {
+    ValueGenerator::ValueGenerator(int numberOfValues, int maxOccurrences) {
         this->numberOfValues = numberOfValues;
+        this->maxOccurrences = maxOccurrences;
         FillArray();
     }
 
@@ -17,7 +18,7 @@ namespace AsciiGame {
         for(unsigned int i = 0; i < numberOfValues; i++) {
             do {
                 value = rand() % (CARD_VARIANTS + 1);
-            } while(CountOccurrences(value) >= maxOccurences);
+            } while(CountOccurrences(value) >= maxOccurrences);
 
             generatedValues.push_back(value);
         }

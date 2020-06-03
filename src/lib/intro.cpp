@@ -91,4 +91,51 @@ namespace AsciiGame {
             getch();
             clear();
     }
+
+    int Intro::AskDifficultyLevel(void) {
+        printw("\n\n\n\tJust one last thing before we can start the game.\n\t\tWhat difficylty level do you prefer?");
+
+        std::string options[3] = { "easy", "medium", "hard" };
+        int optionsSize = (sizeof(options)/sizeof(*options));
+
+        WINDOW * difficultyMenu = newwin((2 * optionsSize + 1), 60, 8, 5);
+        box(difficultyMenu, 0, 0);
+        refresh();
+        wrefresh(difficultyMenu);
+
+        keypad(difficultyMenu, true);
+
+        int userInput = 0;
+        int highlightedOption = 0;
+
+        while(true) {
+            for(int i = 0; i < optionsSize; i ++) {               
+                if(i == highlightedOption) {
+                    wattron(difficultyMenu, A_REVERSE);
+                    mvwprintw(difficultyMenu, (1 + i * 2), 1, options[i].c_str());
+                    wattroff(difficultyMenu, A_REVERSE);
+                }
+                else {
+                    mvwprintw(difficultyMenu, (1 + i * 2), 1, options[i].c_str());
+                }
+            }
+
+                userInput = wgetch(difficultyMenu);
+
+                if(userInput == KEY_UP && (highlightedOption - 1) >= 0) {
+                    highlightedOption--;
+                }
+                else if(userInput == KEY_DOWN && (highlightedOption + 1) < optionsSize) {
+                    highlightedOption++;
+                }
+
+                if(userInput == 10) {
+                    break;
+                }
+        }
+
+        clear();
+
+        return highlightedOption;
+    }
 }

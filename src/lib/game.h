@@ -10,7 +10,7 @@ namespace AsciiGame {
 
         //Constructor
         public:
-            Game(int cardsPerAxis);
+            Game(int cardsPerAxis, int cardOccurence);
 
         public:
             int SelectCard(void);

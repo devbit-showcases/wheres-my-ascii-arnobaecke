@@ -8,7 +8,7 @@ namespace AsciiGame {
     class ValueGenerator { 
         //Constructor
         public:
-            ValueGenerator(int numberOfValues);
+            ValueGenerator(int numberOfValues, int maxOccurrences);
 
         public:
             std::vector<int> GetGeneratedValues(void);
@@ -19,6 +19,7 @@ namespace AsciiGame {
         
         private:
             int numberOfValues = 0;
+            int maxOccurrences = 0;
             std::vector<int> generatedValues;
     };
 }

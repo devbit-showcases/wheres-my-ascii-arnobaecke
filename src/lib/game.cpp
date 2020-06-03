@@ -2,11 +2,11 @@
 
 namespace AsciiGame
 {
-    Game::Game(int cardsPerAxis) {
+    Game::Game(int cardsPerAxis, int cardOccurence) {
         this->cardsPerAxis = cardsPerAxis;
         this->cardsOnPlayfield = cardsPerAxis * cardsPerAxis;
 
-        AsciiGame::ValueGenerator ValueGenerator(cardsOnPlayfield);
+        AsciiGame::ValueGenerator ValueGenerator(cardsOnPlayfield, cardOccurence);
         this->cardValues = ValueGenerator.GetGeneratedValues();
 
         this->previouslyChosenCard = -999;
