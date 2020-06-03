@@ -4,26 +4,20 @@ namespace AsciiGame
 {
     Game::Game(int cardsPerAxis, int cardOccurence) {
         this->cardsPerAxis = cardsPerAxis;
+        this->cardOccurrence = cardOccurence;
         this->cardsOnPlayfield = cardsPerAxis * cardsPerAxis;
 
-        this->cardOccurrence = cardOccurence;
-
-        AsciiGame::ValueGenerator ValueGenerator(cardsOnPlayfield, cardOccurence);
-        this->cardValues = ValueGenerator.GetGeneratedValues();
+        AsciiGame::ValueGenerator valuegenerator(cardsOnPlayfield, cardOccurence);
+        this->cardValues = valuegenerator.GetGeneratedValues();
     }
 
     int Game::SelectCard(void)
     {
         keypad(stdscr, true);
 
-        while(true) {
+        do {
             BuildPlayfield();
-            
-            bool selection = NavigateAndSelect();
-            if(selection) {
-                break;
-            }
-        }
+        } while (! selectCard());
         
         if(! cardRevealed[selectedCard]) {
             CheckIfCorrect();
@@ -54,7 +48,7 @@ namespace AsciiGame
         refresh();
     }
 
-    bool Game::NavigateAndSelect(void) {
+    bool Game::selectCard(void) {
         int userInput = wgetch(stdscr);
 
         if(userInput == KEY_LEFT && (selectedCard - 1) % cardsPerAxis < (cardsPerAxis - 1) && (selectedCard -1) >= 0) {
@@ -72,8 +66,15 @@ namespace AsciiGame
 
         bool selectThisCard = false;
 
-        // Enter key
-        if(userInput == 10) {
+        // *-key (easter egg)
+        if(userInput == 42 && ! cardRevealed[selectedCard]) {
+            cardRevealed[selectedCard] = true;
+            BuildPlayfield();
+            getch();
+            cardRevealed[selectedCard] = false;
+        }
+        // Enter-key (select)
+        else if(userInput == 10) {
             selectThisCard = true;
         }
 
@@ -82,44 +83,44 @@ namespace AsciiGame
 
     void Game::CheckIfCorrect(void) {
         cardRevealed[selectedCard] = true;
-        selectedCards.push_back(selectedCard);
+        chosenCards.push_back(selectedCard);
         BuildPlayfield();
 
         // All identical cards found
-        if(SelectedCardsIdentical() && (selectedCards.size() == cardOccurrence)) {
-            selectedCards.clear();
+        if(chosenCardsIdentical() && (chosenCards.size() == cardOccurrence)) {
+            chosenCards.clear();
         }
         // Wrong guess
-        else if(! SelectedCardsIdentical()) {
+        else if(! chosenCardsIdentical()) {
             getch();
-            UnrevealSelectedCards();
-            selectedCards.clear();
+            UnrevealChosenCards();
+            chosenCards.clear();
         }
         else {
             // Do nothing
         }
     }
 
-    bool Game::SelectedCardsIdentical(void) {
-        bool isCorrect = true;
+    bool Game::chosenCardsIdentical(void) {
+        bool allIdentical = true;
 
-        int reference = selectedCards[0];
+        int reference = chosenCards[0];
         int compariser = 0;
 
-        for(unsigned int i = 0; i < selectedCards.size(); i++) {
-            compariser = selectedCards[i];
+        for(unsigned int i = 0; i < chosenCards.size(); i++) {
+            compariser = chosenCards[i];
 
             if(cardValues[compariser] != cardValues[reference]) {
-                isCorrect = false;
+                allIdentical = false;
             }
         }
 
-        return isCorrect;
+        return allIdentical;
     }
 
-    void Game::UnrevealSelectedCards(void) {
-        for(unsigned int i = 0; i < selectedCards.size(); i++) {
-            int cardNumber = selectedCards[i];
+    void Game::UnrevealChosenCards(void) {
+        for(unsigned int i = 0; i < chosenCards.size(); i++) {
+            int cardNumber = chosenCards[i];
             cardRevealed[cardNumber] = false;
         }
     }

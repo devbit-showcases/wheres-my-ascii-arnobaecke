@@ -17,10 +17,10 @@ namespace AsciiGame {
 
         private:
             void BuildPlayfield(void);
-            bool NavigateAndSelect(void);
+            bool selectCard(void);
             void CheckIfCorrect(void);
-            bool SelectedCardsIdentical(void);
-            void UnrevealSelectedCards(void);
+            bool chosenCardsIdentical(void);
+            void UnrevealChosenCards(void);
             void PrintCard(int cardNumber, int cardValue, bool);
         
         private:
@@ -29,7 +29,7 @@ namespace AsciiGame {
             int cardOccurrence = 0;
 
             std::vector<int> cardValues;
-            std::vector<int> selectedCards;
+            std::vector<int> chosenCards;
             bool cardRevealed[16] = {0}; // Max size = 16
             int selectedCard = 0;
     };
