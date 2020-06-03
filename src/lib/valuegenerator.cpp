@@ -9,7 +9,7 @@ namespace AsciiGame {
 
     void ValueGenerator::FillArray(void) {
         const int CARD_VARIANTS = 4;
-        int maxOccurences = numberOfValues / CARD_VARIANTS;
+        int maxOccurrences = numberOfValues / CARD_VARIANTS;
 
         srand (time(NULL));
 

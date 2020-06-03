@@ -11,25 +11,25 @@ int main(void) {
     int level = intro.AskDifficultyLevel();
 
     int playfieldSize = 0;
-    int cardOccurence = 0;
+    int cardOccurrence = 0;
 
     switch(level) {
         case 0: // Easy
         default:
             playfieldSize = 3;
-            cardOccurence = 2;
+            cardOccurrence = 2;
             break;
         case 1: // Medium
             playfieldSize = 3;
-            cardOccurence = 3;
+            cardOccurrence = 3;
             break;
         case 2: // Hard
             playfieldSize = 4;
-            cardOccurence = 3;
+            cardOccurrence = 3;
             break;
     }
 
-    AsciiGame::Game game(playfieldSize, cardOccurence);
+    AsciiGame::Game game(playfieldSize, cardOccurrence);
 
     int selectedCard;
 
