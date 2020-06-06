@@ -2,6 +2,12 @@
 
 namespace AsciiGame {
     Intro::Intro(void) {
+        prepareNcurses();
+        PrintLogo();
+        PrintInstructions();
+    }
+
+    void Intro::prepareNcurses(void) {
         // Initialize ncurses (allocate memory and clear console)
         initscr();
 
@@ -23,12 +29,6 @@ namespace AsciiGame {
             refresh();
             getch();
         }
-
-        // Show the logo
-        PrintLogo();
-
-        // Show the instructions
-        PrintInstructions();
     }
 
     void Intro::PrintLogo(void) {
@@ -93,7 +93,7 @@ namespace AsciiGame {
     }
 
     int Intro::AskDifficultyLevel(void) {
-        printw("\n\n\n\tJust one last thing before we can start the game.\n\t\tWhat difficylty level do you prefer?");
+        printw("\n\n\n\tJust one last thing before we can start the game.\n\t\tWhat difficulty level do you prefer?");
 
         std::string options[3] = { "easy", "medium", "hard" };
         int optionsSize = (sizeof(options)/sizeof(*options));
@@ -108,7 +108,7 @@ namespace AsciiGame {
         int userInput = 0;
         int highlightedOption = 0;
 
-        while(true) {
+        do {
             for(int i = 0; i < optionsSize; i ++) {               
                 if(i == highlightedOption) {
                     wattron(difficultyMenu, A_REVERSE);
@@ -120,19 +120,16 @@ namespace AsciiGame {
                 }
             }
 
-                userInput = wgetch(difficultyMenu);
+            userInput = wgetch(difficultyMenu);
 
-                if(userInput == KEY_UP && (highlightedOption - 1) >= 0) {
-                    highlightedOption--;
-                }
-                else if(userInput == KEY_DOWN && (highlightedOption + 1) < optionsSize) {
-                    highlightedOption++;
-                }
+            if(userInput == KEY_UP && (highlightedOption - 1) >= 0) {
+                highlightedOption--;
+            }
+            else if(userInput == KEY_DOWN && (highlightedOption + 1) < optionsSize) {
+                highlightedOption++;
+            }
 
-                if(userInput == 10) {
-                    break;
-                }
-        }
+        } while(userInput != 10);
 
         clear();
 

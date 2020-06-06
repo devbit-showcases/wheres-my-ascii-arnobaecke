@@ -7,8 +7,15 @@
 using namespace std;
 
 int main(void) {
-    AsciiGame::Intro intro;
+    cout << "\nWHERE'S MY ASCII." << endl;
+    cout << "-------------------\n" << endl;
+    cout << "Note: Please maximize this console window now. It is important that it doesn't get resized when the game is running.\n" << endl;
 
+    string nickname = "";
+    cout << "Before we can start. What is your name? ";
+    cin >> nickname;
+
+    AsciiGame::Intro intro;
     int level = intro.AskDifficultyLevel();
 
     int playfieldSize = 0;
@@ -38,7 +45,7 @@ int main(void) {
     endwin();
     int score = game.GetScore();
 
-    AsciiGame::Scoreboard("./scores.txt", score, "Arno");
+    AsciiGame::Scoreboard("./scores.txt", score, nickname);
 
     cout << "\nEnd of game. Goodbye!\nUse the enter-key to continue . . ." << endl;
     cin.ignore();

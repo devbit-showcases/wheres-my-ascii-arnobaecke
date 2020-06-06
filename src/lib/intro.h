@@ -9,6 +9,7 @@ namespace AsciiGame {
             Intro(void);
 
         private:
+            void prepareNcurses(void);
             void PrintLogo(void);
             void PrintInstructions(void);
 

@@ -1,0 +1,12 @@
+3;Arno
+3;Arno
+3;Arno
+3;Arno
+3;Arno
+3;Arno
+3;Arno
+400;Arno
+0;Arno
+100;Arno
+0;Arno
+400;Arno
