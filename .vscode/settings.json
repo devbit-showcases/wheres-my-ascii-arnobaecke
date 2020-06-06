@@ -42,6 +42,7 @@
         "iterator": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "fstream": "cpp"
     }
 }

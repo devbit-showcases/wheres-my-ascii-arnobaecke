@@ -11,9 +11,32 @@ namespace AsciiGame
         AsciiGame::ValueGenerator valuegenerator(cardsOnPlayfield, cardOccurence);
         this->cardValues = valuegenerator.GetGeneratedValues();
 
-        while(true) {
+        do {
             SelectCard();
+        } while(rightGuesses < (cardsOnPlayfield / 2));
+
+        attron(A_BOLD);
+        attron(A_UNDERLINE);
+        mvwprintw(stdscr, 10, 120, std::string("Game finished. Please press the enter-key to continue.").c_str());
+        attroff(A_BOLD);
+        attron(A_UNDERLINE);
+
+        int userInput = 0;
+
+        do {
+            //Wait
+            userInput = wgetch(stdscr);
+        } while(userInput != 10);
+    }
+
+    int Game::GetScore(void) {
+        int score = 100 - (wrongGuesses * 10);
+
+        if(score < 0) {
+            score = 0;
         }
+
+        return score;
     }
 
     void Game::SelectCard(void)
@@ -30,7 +53,7 @@ namespace AsciiGame
     }
 
     void Game::BuildPlayfield(void) {
-        for(int i = 0; i < cardsOnPlayfield; i++) {
+        for(unsigned int i = 0; i < cardsOnPlayfield; i++) {
             // Revealed card, selected
             if(cardRevealed[i] && (i == selectedCard)) {
                 cardMaker.PrintCard(i, cardValues[i], true);
@@ -49,8 +72,8 @@ namespace AsciiGame
             }
         }
 
-        std::string status = "Wrong guesses: " + std::to_string(wrongGuesses);
-        mvwprintw(stdscr, 5, 120, status.c_str());
+        mvwprintw(stdscr, 3, 120, std::string("Right guesses: " + std::to_string(rightGuesses)).c_str());
+        mvwprintw(stdscr, 5, 120, std::string("Wrong guesses: " + std::to_string(wrongGuesses)).c_str());
 
         refresh();
     }
@@ -58,7 +81,7 @@ namespace AsciiGame
     bool Game::selectCard(void) {
         int userInput = wgetch(stdscr);
 
-        if(userInput == KEY_LEFT && (selectedCard - 1) % cardsPerAxis < (cardsPerAxis - 1) && (selectedCard -1) >= 0) {
+        if(userInput == KEY_LEFT && ((selectedCard - 1) % cardsPerAxis) < (cardsPerAxis - 1) && (selectedCard -1) >= 0) {
             selectedCard--;
         }
         else if(userInput == KEY_RIGHT && (selectedCard + 1) % cardsPerAxis > 0) {
@@ -96,6 +119,7 @@ namespace AsciiGame
         // All identical cards found
         if(chosenCardsIdentical() && (chosenCards.size() == cardOccurrence)) {
             chosenCards.clear();
+            rightGuesses++;
         }
         // Wrong guess
         else if(! chosenCardsIdentical()) {

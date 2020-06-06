@@ -65,7 +65,7 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 0), iconXPosition, "  .");
             mvwprintw(card, (iconYPosition + 1), iconXPosition, " / \\");
             mvwprintw(card, (iconYPosition + 2), iconXPosition, "(   )");
-            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  | ");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  |");
             wattroff(card, COLOR_PAIR(2));
         }
         // > Diamonds
@@ -74,17 +74,26 @@ namespace AsciiGame
             mvwprintw(card, (iconYPosition + 0), iconXPosition, "  .");
             mvwprintw(card, (iconYPosition + 1), iconXPosition, " / \\");
             mvwprintw(card, (iconYPosition + 2), iconXPosition, " \\ /");
-            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  °");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  *");
             wattroff(card, COLOR_PAIR(3));
         }
         // > Heart
         else if(cardValue == 4) {
-            wattron(card, COLOR_PAIR(0));
+            wattron(card, COLOR_PAIR(4));
             mvwprintw(card, (iconYPosition + 0), iconXPosition, " _ _");
             mvwprintw(card, (iconYPosition + 1), iconXPosition, "( v )");
             mvwprintw(card, (iconYPosition + 2), iconXPosition, " \\ /");
             mvwprintw(card, (iconYPosition + 3), iconXPosition, "  *");
-            wattroff(card, COLOR_PAIR(0));
+            wattroff(card, COLOR_PAIR(4));
+        }
+        // > Cat
+        else if(cardValue == 5) {
+            wattron(card, COLOR_PAIR(5));
+            mvwprintw(card, (iconYPosition + 0), iconXPosition, " /\\_/\\");
+            mvwprintw(card, (iconYPosition + 1), iconXPosition, "( o o )");
+            mvwprintw(card, (iconYPosition + 2), iconXPosition, "==_Y_==");
+            mvwprintw(card, (iconYPosition + 3), iconXPosition, "  `-'");
+            wattroff(card, COLOR_PAIR(5));
         }
 
         // > Cursor (big or small)

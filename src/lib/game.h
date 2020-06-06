@@ -11,6 +11,9 @@ namespace AsciiGame {
         public:
             Game(int cardsPerAxis, int cardOccurence);
 
+        public:
+            int GetScore(void);
+
         private:
             void SelectCard(void);
             void BuildPlayfield(void);
@@ -33,5 +36,6 @@ namespace AsciiGame {
             int selectedCard = 0;
 
             int wrongGuesses = 0;
+            int rightGuesses = 0;
     };
 }

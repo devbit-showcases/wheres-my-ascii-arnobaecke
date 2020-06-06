@@ -13,8 +13,8 @@ namespace AsciiGame {
             // Inititalize the color pairs
             init_pair(0, COLOR_RED, -1);
             init_pair(1, COLOR_GREEN, -1);
-            init_pair(2, COLOR_BLUE, -1);
-            init_pair(3, COLOR_YELLOW, -1);
+            init_pair(2, COLOR_YELLOW, -1);
+            init_pair(3, COLOR_BLUE, -1);
             init_pair(4, COLOR_CYAN, -1);
             init_pair(5, COLOR_MAGENTA, -1);
         }
@@ -56,9 +56,9 @@ namespace AsciiGame {
             std::string("\t\t\t\t\t\t|___ |  | |  \\ |__/    |___ |__/ |  |  | |__| | \\|\n") +
             std::string("\n\n\n\t\t\t\tPRESS ANY KEY TO CONTINUE...\n");
 
-            attron(COLOR_PAIR(3));
+            attron(COLOR_PAIR(2));
             printw(logo.c_str());
-            attroff(COLOR_PAIR(3));
+            attroff(COLOR_PAIR(2));
 
             getch();
             clear();

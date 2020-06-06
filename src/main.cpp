@@ -2,6 +2,7 @@
 
 #include "lib/intro.h"
 #include "lib/game.h"
+#include "lib/scoreboard.h"
 
 using namespace std;
 
@@ -31,11 +32,16 @@ int main(void) {
 
     AsciiGame::Game game(playfieldSize, cardOccurrence);
 
-    //KEEP OPEN
-    getch();
+    clear();
 
     // end ncurses (deallocate memory)
     endwin();
+    int score = game.GetScore();
+
+    AsciiGame::Scoreboard("./scores.txt", score, "Arno");
+
+    cout << "\nEnd of game. Goodbye!\nUse the enter-key to continue . . ." << endl;
+    cin.ignore();
     
     return 0;
 }

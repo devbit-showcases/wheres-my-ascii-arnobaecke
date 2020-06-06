@@ -1,10 +1,19 @@
 #include "scoreboard.h"
 
-namespace WordBlaster {
+namespace AsciiGame {
 
-    Scoreboard::Scoreboard(std::string filePath)
+    Scoreboard::Scoreboard(std::string filePath, int currentScore, std::string currentNickname)
     {
         this->filePath = filePath;
+        this->currentScore = currentScore;
+        this->currentNickname = currentNickname;
+
+        WordBlaster::FileStream fileStream;
+
+        fileStream.WriteToScoreBoard(filePath, currentScore, currentNickname);
+
+        std::vector<std::string> scores = fileStream.ReadLines(filePath);
+        Summary(scores, currentScore, currentNickname);
     }
 
     void Scoreboard::Summary(std::vector<std::string> scoreboardLines, int currentScore, std::string nickname)
