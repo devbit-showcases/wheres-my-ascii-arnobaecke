@@ -5,7 +5,6 @@
 
 namespace AsciiGame {
     class Intro {
-        //Constructor   
         public:
             Intro(void);
 

@@ -26,6 +26,9 @@ OBJS := $(patsubst %.cpp,%.o,$(shell find $(SRCDIR) -name '*.cpp'))
 
 all: makebuildir $(TARGET)
 
+run: all
+	./$(BUILDDIR)/$(TARGET)
+
 $(TARGET) : $(OBJS)
 	$(CC) $(LDFLAGS) -o $(BUILDDIR)/$@ $(OBJS) $(LIBS)
 

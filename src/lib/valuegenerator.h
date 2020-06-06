@@ -1,12 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <time.h>
 #include <vector>
 
 namespace AsciiGame {
     class ValueGenerator { 
-        //Constructor
         public:
             ValueGenerator(int numberOfValues, int maxOccurrences);
 

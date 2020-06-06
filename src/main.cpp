@@ -31,12 +31,6 @@ int main(void) {
 
     AsciiGame::Game game(playfieldSize, cardOccurrence);
 
-    int selectedCard;
-
-    while(true) {
-        selectedCard = game.SelectCard();
-    }
-
     //KEEP OPEN
     getch();
 
