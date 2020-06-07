@@ -95,7 +95,7 @@ namespace AsciiGame {
     int Intro::AskDifficultyLevel(void) {
         printw("\n\n\n\tJust one last thing before we can start the game.\n\t\tWhat difficulty level do you prefer?");
 
-        std::string options[3] = { "easy", "medium", "hard" };
+        std::string options[3] = { "easy\t(3x3, 2 matches)", "medium\t(3x3, 3 matches)", "hard\t(4x4, 3 matches)" };
         int optionsSize = (sizeof(options)/sizeof(*options));
 
         WINDOW * difficultyMenu = newwin((2 * optionsSize + 1), 60, 8, 5);

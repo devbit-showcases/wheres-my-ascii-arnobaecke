@@ -13,7 +13,7 @@ namespace AsciiGame
 
         do {
             SelectCard();
-        } while(rightGuesses < (cardsOnPlayfield / 2));
+        } while(rightGuesses < (cardsOnPlayfield / cardOccurence));
 
         attron(A_BOLD);
         attron(A_UNDERLINE);
@@ -53,7 +53,7 @@ namespace AsciiGame
     }
 
     void Game::BuildPlayfield(void) {
-        for(unsigned int i = 0; i < cardsOnPlayfield; i++) {
+        for(int i = 0; i < cardsOnPlayfield; i++) {
             // Revealed card, selected
             if(cardRevealed[i] && (i == selectedCard)) {
                 cardMaker.PrintCard(i, cardValues[i], true);

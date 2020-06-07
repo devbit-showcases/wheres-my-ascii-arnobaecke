@@ -10,3 +10,7 @@
 100;Arno
 0;Arno
 400;Arno
+80;arno
+100;Arno
+100;Arno
+100;Arno
