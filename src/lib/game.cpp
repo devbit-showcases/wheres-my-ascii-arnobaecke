@@ -17,7 +17,7 @@ namespace AsciiGame
 
         attron(A_BOLD);
         attron(A_UNDERLINE);
-        mvwprintw(stdscr, 10, 120, std::string("Game finished. Please press the enter-key to continue.").c_str());
+        mvwprintw(stdscr, 10, 120, std::string("Game finished. Please press the enter-key to view the scoreboard.").c_str());
         attroff(A_BOLD);
         attron(A_UNDERLINE);
 
@@ -118,15 +118,21 @@ namespace AsciiGame
 
         // All identical cards found
         if(chosenCardsIdentical() && (chosenCards.size() == cardOccurrence)) {
+            mvwprintw(stdscr, 10, 120, std::string("That's right! Well done! Let's try another one.").c_str());
             chosenCards.clear();
             rightGuesses++;
         }
         // Wrong guess
         else if(! chosenCardsIdentical()) {
+            mvwprintw(stdscr, 10, 120, std::string("That was a wrong guess. Better luck next time.").c_str());
             getch();
             UnrevealChosenCards();
             chosenCards.clear();
             wrongGuesses++;
+            mvwprintw(stdscr, 10, 120, std::string("Search wisely for a new card.\t\t\t").c_str());
+        }
+        else {
+            mvwprintw(stdscr, 10, 120, std::string("Now find the matching one.\t\t\t").c_str());
         }
     }
 
