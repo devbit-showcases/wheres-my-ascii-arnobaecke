@@ -14,3 +14,9 @@
 100;Arno
 100;Arno
 100;Arno
+80;Arno
+80;Arno
+80;Arno
+60;Arno
+80;Arno
+90;Arno

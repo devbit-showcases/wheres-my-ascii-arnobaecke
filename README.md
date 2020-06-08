@@ -1,5 +1,30 @@
 # Where's My ASCII
 
+## Solution
+
+### Prerequisites
+
+- A Linux PC or a Windows-PC with the Linux subsystem installed
+- For an optimal experience: a console that supports colors
+
+### Starting the app
+
+A binary of this game can be found here: `./bin/app.exe`.
+
+To compile the app and run it (from the current directory):
+
+```terminal
+make run
+```
+
+### Screencast
+
+[![Screencast](./img/screencast-clickable.jpg)](https://youtu.be/SjR69msuhJ0)
+
+---
+
+## Task
+
 Where's My ASCII is a game meant to train the memory capacity of your brain.
 
 It consist of a randomly generated playfield of tiles, where each tile contains a hidden letter.
@@ -20,7 +45,7 @@ The game should also introduce a difficulty that influences:
 * the size of the playfield
 * the number of tiles that need to match (2, 3, ...)
 
-## Challenge
+### Challenge
 
 **Minimal requirements:**
 
@@ -50,7 +75,7 @@ The game should also introduce a difficulty that influences:
 
 The idea is that you can be really creative in your implementation and your interface. Use your creativity wisely to make this a fun and nice looking game.
 
-## SCREENCAST
+### SCREENCAST
 
 **Screencast**:
 
@@ -62,10 +87,10 @@ The idea is that you can be really creative in your implementation and your inte
 
 Use Kaltura or OBS Studio to make your screencast. Upload the video to YouTube and place a link in this README.
 
-## DEADLINE
+### DEADLINE
 
 The deadline for this challenge is: **Monday the 8th of June (23:59)**
 
-## WARNING
+### WARNING
 
 This challenge is a solo-challenge. While you can help someone by giving some pointers or explaining something, the repo's should not contain copy-pasted code from another student. This challenge is a big part of you grade for OOP3, so be sure to take this challenge serious.
