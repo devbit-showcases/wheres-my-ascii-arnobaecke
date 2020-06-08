@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <array>
 #include <stdlib.h>
 #include <time.h>
 
@@ -10,15 +10,16 @@ namespace AsciiGame {
             ValueGenerator(int numberOfValues, int maxOccurrences);
 
         public:
-            std::vector<int> GetGeneratedValues(void);
+            std::array<int, 16> GetGeneratedValues(void);
 
         private:
             void FillArray(void);
-            int CountOccurrences(int value);
+            void AddValue(int value);
         
         private:
             int numberOfValues = 0;
             int maxOccurrences = 0;
-            std::vector<int> generatedValues;
+            std::array<int, 16> generatedValues = { 0 };
+            bool indexTaken[16] = { false };
     };
 }

@@ -1,44 +1,49 @@
 #include "valuegenerator.h"
 
+#include <ncurses.h>
+#include <string>
+
 namespace AsciiGame {
     ValueGenerator::ValueGenerator(int numberOfValues, int maxOccurrences) {
         this->numberOfValues = numberOfValues;
         this->maxOccurrences = maxOccurrences;
+        
         FillArray();
     }
 
-    void ValueGenerator::FillArray(void) {
-        const int CARD_VARIANTS = (numberOfValues -1 ) / maxOccurrences; // Max 5
-
-        srand (time(NULL));
-
-        int value = 0;
-
-        for(int i = 0; i < numberOfValues; i++) {
-            do {
-                value = rand() % (CARD_VARIANTS + 1);
-            } while(CountOccurrences(value) >= maxOccurrences);
-
-            generatedValues.push_back(value);
-        }
-    }
-
-    std::vector<int> ValueGenerator::GetGeneratedValues(void) {
+    std::array<int, 16> ValueGenerator::GetGeneratedValues(void) {
 
         return generatedValues;
     }
 
-    int ValueGenerator::CountOccurrences(int value) {
-        int occurrences = 0;
+    void ValueGenerator::FillArray(void) {
+        int cardVariants = (numberOfValues - 1 ) / maxOccurrences; // Max 5
 
-        for(unsigned int i = 0; i < generatedValues.size(); i++) {
-            if(generatedValues[i] == value) {
-                occurrences++;
-            }
+        clear();
+        endwin();
+
+        // Loop through card variants
+        for(int i = 0; i < cardVariants + 1; i++) {
+            AddValue(i);
         }
-
-        return occurrences;
+        
     }
 
-    std::vector<int> generatedValues;
+    void ValueGenerator::AddValue(int value) {
+        // Add value to array 2x or 3x on a random, empty index
+
+        int index = 0;
+
+        for(int i = 0; i < maxOccurrences; i++) {
+
+            srand (time(NULL));
+
+            do {
+                index = rand() % (numberOfValues + 1);
+            } while(indexTaken[index] != false);
+            
+            generatedValues[index] = value;
+            indexTaken[index] = true;
+        }
+    }
 }

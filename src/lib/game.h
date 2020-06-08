@@ -29,7 +29,7 @@ namespace AsciiGame {
             int cardsOnPlayfield = 0;
             int cardOccurrence = 0;
 
-            std::vector<int> cardValues;
+            std::array<int, 16> cardValues;
             std::vector<int> chosenCards;
 
             bool cardRevealed[16] = {0};
