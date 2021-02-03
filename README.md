@@ -1,5 +1,7 @@
 # Where's My ASCII
 
+![Screenshot](./img/screenshot.png)
+
 ## Setup using Docker
 
 Building the image
