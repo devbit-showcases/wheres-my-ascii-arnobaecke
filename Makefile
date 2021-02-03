@@ -18,7 +18,7 @@ CFLAGS=-c -Wall -std=c++11
 LIBS= -lncurses
 
 # Name of executable output
-TARGET=app.exe
+TARGET=ascii
 SRCDIR=src
 BUILDDIR=bin
 

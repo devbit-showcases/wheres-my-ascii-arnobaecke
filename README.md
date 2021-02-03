@@ -1,5 +1,19 @@
 # Where's My ASCII
 
+## Setup using Docker
+
+Building the image
+
+```bash
+docker build . -t arno-where-is-my-ascii
+```
+
+Running the container
+
+```bash
+docker run -it --rm arno-where-is-my-ascii
+```
+
 ## Solution
 
 ### Prerequisites
